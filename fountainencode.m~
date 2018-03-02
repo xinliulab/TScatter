@@ -1,0 +1,10 @@
+function y = fountainEncode(sourceFile, degreeList)
+    
+    for i = 1: size(degreeList,2)
+        if i + 1 == size(degreeList,2)
+           y = xor(sourceFile(i) 
+
+end
+
+
+
