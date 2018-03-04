@@ -1,9 +1,9 @@
-function y = fountainencode(sourceFile, degreeNeighborList)
-    
-    % sourceFile is a row of hexadecimal numbers
-    for i = 1: size(degreeNeighborList,2)
-        if i + 1 <= size(degreeNeighborList,2)
-           y = bitxor(sourceFile(1,i), sourceFile(1,i));
+function y = fountainencode(sourcefile, neighborlist)
+    for i  = 1 : size(neighborlist, 2)
+        if i == 1 
+            y = bitxor(0, sourcefile(1, neighborlist(1,i)));
+        elseif i > 1
+            y = bitxor(y, sourcefile(1, neighborlist(1,i)));
         end
     end
 end
