@@ -1,0 +1,67 @@
+close all;
+clear;
+clc;
+
+%%
+% Spectrum Efficiency
+clear
+linkquality_scale = 0.05;
+linkquality_iteration = 20; %Please manual1y set: 1/0.05
+iteration = 20;
+
+data_delay = zeros(linkquality_iteration,2);
+
+for j = 1: 1: linkquality_iteration
+    linkquality  = j * linkquality_scale;
+    delay = 0;
+    for i = 1 : 1 : iteration
+        [sourcefile, decode, time, ntx, nrx] = spectrumefficiency(6, linkquality, 100, 10);
+        delay = delay + time;
+    end
+    averagedelay = round(delay / iteration);
+    data_delay(j, :) = [linkquality, averagedelay];
+end
+
+    plot(data_delay(:,1). datadelay(:,2))
+
+% fig_delay = figure('Position',[0 250 800 350]);
+% p=bar(data,1.5);
+% % p(1).LineWidth=4;
+% % p(2).LineWidth=4;
+%  p(1,1).FaceColor=[0.3 0.3 0.3];
+%  p(1,2).FaceColor='r';
+% % p(1).MarkerSize=14;
+% % p(2).MarkerSize=14;
+% % p(1).LineStyle='-';
+% % p(2).LineStyle='--';
+% % p(1).Marker='+';
+% % p(2).Marker='x';
+% %hold on;
+% %p=plot(data_2,'--x','LineWidth',3,'Color','r','MarkerSize',13);
+% %e2=errorbar(data_2,error_2,'LineWidth',2);
+% %legend('Downlink','Uplink','Location','north','Orientation','horizontal');
+% %set(gca,'YTick',0:0.5:2);
+% set(gca, 'FontSize', 22, 'FontWeight', 'bold');
+% %set(gca,'XTickLabel',{'0','20','40'});
+% %ylim([-100 -30]);
+% xlim([0.5 15.5]);
+% xlabel('Number of ZigBee Devices');
+% %set(gca,'XTickLabel',{'0.25','5','10','15','20','25','30','35'});
+% %set(gca,'YTickLabel',{'0','0.5%','1%','1.5%','2%'});
+% ylabel('Energy Consumption');
+% %set(fig,'PaperPositionMode','auto');
+% 
+% %hold off;
+% grid on;
+% set(gca,'GridAlpha',0.8);
+% set(gca,'LineWidth',1.6);
+% legend(p,{'ZigBee Radio','Bacscatter'},'Location','northwest','Orientation','horizontal');
+% 
+% fig.PaperPositionMode = 'auto';
+% 
+% fig_pos = fig.PaperPosition;
+% 
+% fig.PaperSize = [fig_pos(3) fig_pos(4)];
+% 
+% 
+% print('energy','-depsc')

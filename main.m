@@ -2,73 +2,56 @@ close all;
 clear;
 clc;
 
-%Generate n bytes data
-datasize = 5;
+%%
+%Define the file consisting of n bytes data
+packetsize = 100;
+
 %link quality
-LQ = 0;
+LQ = 0.5;
 
-status = 0;
+%%
+table = [];
 
-sourcefile = gensourcefile(datasize);
+% 0, continue; 1, finish!
+decodestatus = 0; 
 
-codecache = [];
-combinetable = [];
+% number of times for transmission
+ntr = 0;
 
-while(1)
-    %Generate code
-    degree = gendegree(sourcefile);
-    neighborlist = sort(genneighborlist(sourcefile, degree));
-    code = fountainencode(sourcefile, neighborlist);
+% Generate n bytes data randomly to construct the source file.
+sourcefile = gensourcefile(packetsize);
+
+
+while(~decodestatus)
+    % Generate code
+    [code, degree, neighborlist] = fountainencode(sourcefile);    
     
+    % Link Quality
+    lqneighborlist = genlinkquality(LQ) * neighborlist;
     
-    %Link Quality
+    ntr = ntr + 1;
     
-    codecache = [codecache; code];
-    combine= gencombine(datasize, neighborlist);
-    combinetable = [combinetable; combine];
+    % Generate table.
+    % The tables describes in each fountain code, which data is combined and what is the result.
+    % It is similar to the A and b in the system of unlinear equations Ax = b.
+    table = gentable(packetsize, table, lqneighborlist, code);
+
+
+    [decodestatus, decode] = fountaindecode(packetsize, table); 
     
-    block = [combinetable, codecache]; 
-    ax = unique(block, 'rows', 'stable');
-    nx = rank(ax);
- 
-    gauss = zeros(datasize, datasize+1); 
-    flag = 0; % flga == 1 means the first non-zero number at diagonal
- 
-    for rk = 1 : nx % the kth of rank, also the numbers of iteration
-         for i = 1 : size(ax,1) 
-             if ax(i, rk) == 1 && flag == 0 
-                flag = i;
-                gauss(rk,:) = ax(i,:);% store the first non-zero row 
-             elseif ax(i, rk) == 1 && flag ~= 0
-                ax(i, :) = bitxor(ax(flag,:), ax(i,:));
-             end
-         end
-         if flag == 0 && gauss(end, end-1) ~= 0
-             fprintf('Finish!\n');
-             status = 1;
-             break
-         elseif flag == 0 && gauss(end, end-1) == 0
-             fprintf('Go on!\n');
-             status = 0;
-         else
-             ax(flag,:) = [];
-             flag = 0;
-         end
+    if decodestatus == 1
+        fprintf('Finish!\n');
     end
-    
-    if status == 1
-        break
-    end
-    
-%     %Decode code
-%     data = fountaindecode(codecache, combinetable);
-%     
-%      
-%     %Decode successfully
-%     if data(end,end-1) == 1
-%         break;
-%     end 
+
 end
 
+%%
+s=sprintf('%d ', sourcefile);
+fprintf('Source: %s\n', s);
+d=sprintf('%d ', decode);
+fprintf('Decode: %s\n', d);
+fprintf('Trasmit %d pacets\n', ntr);
+fprintf('Receive %d pacets\n',size(table,1));
 
+ 
 
