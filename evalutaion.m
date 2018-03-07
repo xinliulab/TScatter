@@ -6,20 +6,22 @@ clc;
 % Spectrum Efficiency
 clear
 linkquality_scale = 0.05;
-linkquality_iteration = 20; %Please manual1y set: 1/0.05
-iteration = 20;
+linkquality_begin = 0.55;
+
+linkquality_iteration = round((1-linkquality_begin)/linkquality_scale+1); %Please manual1y set: 1/0.05
+meaniteration = 50;
 
 data_delay = zeros(linkquality_iteration,2);
 
 for j = 1: 1: linkquality_iteration
-    linkquality  = j * linkquality_scale;
+    linkquality  = linkquality_begin + (j-1) * linkquality_scale;
     delay = 0;
-    for i = 1 : 1 : iteration
+    for i = 1 : 1 : meaniteration
         [sourcefile, decode, time, ntx, nrx] = spectrumefficiency(6, linkquality, 100, 10);
         delay = delay + time;
     end
-    averagedelay = round(delay / iteration);
-    data_delay(j, :) = [linkquality, averagedelay];
+    meandelay = round(delay / meaniteration);
+    data_delay(j, :) = [linkquality, meandelay];
 end
 
 x = data_delay(:,1);
