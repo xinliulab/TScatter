@@ -3,18 +3,19 @@ function y = networkdeploy(number, range, scale)
 parent = [0];
 position = [[1:number]',rand(number,2)*range - range/2]; 
 child = position;
-route = [];
+route = {};
 
 while size(child,1) ~= 0
-    k = 1;
+    flag = 1;%
     d = [];
     for i = 1 : 1 : size(parent, 1)
-        if parent(i) == 0
+        p_id = parent(i,end);
+        if p_id == 0
             p_x = 0;
             p_y = 0;
         else
-            p_x = position(parent(i,end),end-1);
-            p_y = position(parent(i,end),end-1);
+            p_x = position(p_id,end-1);
+            p_y = position(p_id,end);
         end
         for j =  1 : 1 : size(child, 1)
 
@@ -23,8 +24,22 @@ while size(child,1) ~= 0
             c_y = child(j,end);
             
             if (c_x - p_x)^2 + (c_y - p_y)^2 <= scale^2
-                route = [route; parent(i), c_id];
-                k = k + 1;
+                if p_id == 0
+                    if flag == 1
+                        route = {[p_id, c_id]};
+                    else
+                        route = {cell2mat(route),c_id};
+                    end
+                end
+                if p_id ~= 0
+                    if flag == 1
+                        route(i) = {[parent(i), c_id]};
+                else
+                
+                end
+                    
+                
+                flag = flga + 1;%
                 d = [d;j];
             end
         end
