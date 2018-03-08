@@ -33,9 +33,9 @@ while size(child,1) ~= 0
     
     parent = sort(unique(local_route(:,2)));
     for p = 1 : 1 : size(parent,1)
-        tempchild(parent(p,1)-p+1,:) = [0];
+        tempchild(parent(p,1),:) = [0];
     end
-    child = unique(tempchild);
+    child = tempchild(any(tempchild,2),:);
     
     temptable = [];
     for i = 1:1:size(routetable,1)
@@ -49,7 +49,7 @@ while size(child,1) ~= 0
         end
 
     end
-    routetable = unique(temptable);
+    routetable = unique(temptable, 'rows');
 
 end
 
