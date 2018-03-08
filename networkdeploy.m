@@ -9,7 +9,7 @@ numlayer = 0;
 while size(child,1) ~= 0
 %     flag = 1;
     d = [];
-    temp_route = {};
+    local_route = {};
     for i = 1 : 1 : size(parent, 1)
         p_id = parent(i,end);
         if p_id == 0
@@ -26,13 +26,13 @@ while size(child,1) ~= 0
             c_y = child(j,end);
             
             if (c_x - p_x)^2 + (c_y - p_y)^2 <= scale^2 
-                temp_route = {cell2mat(temp_route);[p_id,c_id]};
+                local_route = [local_route;p_id,c_id];
             end             
         end
     end
 %     for n = 1 : 1 : size(temp_route,1)
     
-    parent = temp_route;
+    parent = local_route;
 %     for p = 1 : 1 : size(d,1)
 %         child(d(p,:)-p+1,:) = [];
 %     end
