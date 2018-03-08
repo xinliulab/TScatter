@@ -3,8 +3,7 @@ function y = networkdeploy(number, range, scale)
 parent = [0];
 position = [[1:number]',rand(number,2)*range - range/2]; 
 child = position;
-route = {parent};
-numlayer = 0;
+routetable = [];
 
 while size(child,1) ~= 0
 %     flag = 1;
@@ -30,8 +29,24 @@ while size(child,1) ~= 0
             end             
         end
     end
-    for n = 1: 1: size(local_route,1)-1
-        if local_route(n+1, 1)
+    
+    parent = sort(unique(local_route(:,2)));
+    for p = 1 : 1 : size(parent,1)
+        child(parent(p,1)-p+1,:) = [];
+    end
+    
+    routetable = [routetable,0];
+    temptable = [];
+    for i = 1:1:size(routetable,1)
+        for j = 1:1:size(local_route,1)
+            if routetable(i,end) == local_route(j,1)
+                temptable = [temptable;[routetable(i,1:end-1),local_route(j,2)]]
+            else
+                temptable = [temptable;routetable(i,:)];
+            end                    
+                
+        end
+
     end
 
 end
