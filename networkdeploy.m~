@@ -4,12 +4,13 @@ parent = [0];
 position = [[1:number]',rand(number,2)*range - range/2]; 
 child = position;
 route = {};
+numlayer = 0;
 
 while size(child,1) ~= 0
     flag = 1;%
     d = [];
     for i = 1 : 1 : size(parent, 1)
-        p_id = parent(i,end);
+        p_id = parent(i,end);%%%%
         if p_id == 0
             p_x = 0;
             p_y = 0;
@@ -23,25 +24,12 @@ while size(child,1) ~= 0
             c_x = child(j,end-1);
             c_y = child(j,end);
             
-            if (c_x - p_x)^2 + (c_y - p_y)^2 <= scale^2
-                if p_id == 0
-                    if flag == 1
-                        route = {[p_id, c_id]};
-                    else
-                        route = {cell2mat(route),c_id};
-                    end
-                end
-                if p_id ~= 0
-                    if flag == 1
-                        route(i) = {[parent(i), c_id]};
-                else
-                
-                end
-                    
-                
+            if (c_x - p_x)^2 + (c_y - p_y)^2 <= scale^2 
+                temp_route = {cell2mat(temp_route);[p_id,c_id]};
+            end             
                 flag = flga + 1;%
                 d = [d;j];
-            end
+
         end
     end
     parent = route;
