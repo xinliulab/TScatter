@@ -1,4 +1,4 @@
-function  lqdeploy = linkqualitydeploy(position, scale, lqmean, lqstd)
+function  [temp, y] = linkqualitydeploy(position, scale, lqmean, lqstd)
     
     routetable = networkdeploy(position, scale);
     
@@ -20,7 +20,7 @@ function  lqdeploy = linkqualitydeploy(position, scale, lqmean, lqstd)
         s_id = table(i,end-2);
         d_id = table(i,end-1);
         if s_id == 0
-            table(i,end) =  distance(zeros(1,size(table,2)), position(d_id,:));
+            table(i,end) =  distance([0,0,0], position(d_id,:));
         else
             table(i,end) = distance(position(s_id,:),position(d_id,:));
         end
@@ -30,8 +30,6 @@ function  lqdeploy = linkqualitydeploy(position, scale, lqmean, lqstd)
     
     lq = genlinkquality(size(table,1), lqmean, lqstd);
     lq = sortrows(lq,'descend');
-    lqd = [table, lq];
-    
-    lqdeploy = sortrows(lqd,'ascend');
+    y = [table, lq];
     
 end

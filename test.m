@@ -36,6 +36,6 @@ position = [
 %      0    10     5;
 %      0    10     9];
  
-lqd = linkqualitydeploy(position, scale, meanlq, stdlq);
+y = linkqualitydeploy(position, scale, meanlq, stdlq);
 
  
