@@ -1,12 +1,10 @@
-function  lqdeploy = linkqualitydeploy(position, scale, lqmean, lqstd)
-    
-    routetable = networkdeploy(position, scale);
+function  lqdeploy = linkqualitydeploy(position, routingtable, lqmean, lqstd)
     
     local_route = [];
-    for i = 2:1:size(routetable, 2)
-        for j = 1:1:size(routetable,1)
-            if routetable(j,i) ~= 0
-                local_route = [local_route; routetable(j,i-1:i)];
+    for i = 2:1:size(routingtable, 2)
+        for j = 1:1:size(routingtable,1)
+            if routingtable(j,i) ~= 0
+                local_route = [local_route; routingtable(j,i-1:i)];
             end
         end
     end

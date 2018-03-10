@@ -14,12 +14,12 @@ position = genposition(nodenumber,networkrange);
 %% find the routing and calculate its link quality (lq)
 % communication range
 comrange = 2;
-routingtable = findrouting(position, comrange);
+routingtable = findrouting(position, scale);
 % mean of link quality
 meanlq = 0.8;
 % std of link quality
 stdlq = 0.15; 
-% lqdeploy = linkqualitydeploy(position, meanlq, stdlq);
+lqdeploy = linkqualitydeploy(position, comrange, meanlq, stdlq);
 % 
 % 
 % latency = pando(lqdeploy, sourcefile);

@@ -1,14 +1,4 @@
-function routetable = networkdeploy(position, scale)
-
-%%
-% test
-% clear;
-% clc;
-% close all;
-% number = 10;
-% range = 5;
-% position = genposition(number,range);
-% scale =2;
+function routetable = findrouting(position, scale)
 
 %%
 parent = [0];
