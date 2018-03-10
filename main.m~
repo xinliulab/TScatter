@@ -21,7 +21,7 @@ ntr = 0;
 % Generate n bytes data randomly to construct the source file.
 sourcefile = gensourcefile(packetsize);
 
-%% one hop with two nodes
+%% one 2 one
 % while(~decodestatus)
 %     % Generate code
 %     [code, degree, neighborlist] = fountainencode(sourcefile);    

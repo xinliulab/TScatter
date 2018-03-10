@@ -35,7 +35,33 @@ position = [
 %      0    10     3;
 %      0    10     5;
 %      0    10     9];
- 
-y = linkqualitydeploy(position, scale, meanlq, stdlq);
 
+% rt = networkdeploy(position, scale);
+%  
+% y = linkqualitydeploy(position, scale, meanlq, stdlq);
+packetsize = 5;
+
+%link quality
+LQ = 0.5;
+
+%%
+table = [];
+
+% 0, continue; 1, finish!
+decodestatus = 0; 
+
+% number of times for transmission
+ntr = 0;
+
+% Generate n bytes data randomly to construct the source file.
+for i = 1:1:5
+    a{i} = []
+end
+
+for j = 1:1:5
+    sf = gensourcefile(packetsize)
+    for i = 1:1:5
+        a{i} = [a{i};sf]
+    end
+end
  
