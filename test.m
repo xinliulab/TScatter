@@ -19,7 +19,8 @@ routingtable = findrouting(position, comrange);
 meanlq = 0.8;
 % std of link quality
 stdlq = 0.15; 
-% lqdeploy = linkqualitydeploy(position, meanlq, stdlq);
+
+lqdeploy = callinkquality(position, routingtable, meanlq, stdlq);
 % 
 % 
 % latency = pando(lqdeploy, sourcefile);

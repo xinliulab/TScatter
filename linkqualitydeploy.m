@@ -1,4 +1,4 @@
-function  lqdeploy = linkqualitydeploy(position, routingtable, lqmean, lqstd)
+function  lqdeploy = callinkquality(position, routingtable, lqmean, lqstd)
     
     local_route = [];
     for i = 2:1:size(routingtable, 2)
