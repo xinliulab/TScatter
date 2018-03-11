@@ -3,7 +3,7 @@ function fig = routingfigure(range, position, routetable)
     fig = figure; 
    
     %% Position figure
-    id = [position(:,1)]
+    id = [position(:,1)];
     x= [position(:,2)];
     y= [position(:,3)];
     % plot larger red circles with black edges
@@ -29,7 +29,7 @@ function fig = routingfigure(range, position, routetable)
     axis([-range/2-1,range/2+1,-range/2-1,range/2+1]);
     hold on
 
-    c=['b','g','m','c','r','k'];
+    c=['r','b','g','c','m','k'];
     for i = 2:1:size(routetable,2)
         figtemp = unique(routetable(:,i-1:i),'rows');
         for j = 1:1:size(figtemp,1)
@@ -37,9 +37,9 @@ function fig = routingfigure(range, position, routetable)
             y= figtemp(j,2);
             if y ~= 0
                 if x == 0
-                    plot([0,position(y,2)],[0,position(y,3)],'Color',c(i));
+                    plot([0,position(y,2)],[0,position(y,3)],'Color',c(i-1));
                 else
-                    plot([position(x,2),position(y,2)], [position(x,3),position(y,3)],'Color','b');
+                    plot([position(x,2),position(y,2)], [position(x,3),position(y,3)],'Color',c(i-1));
                 end
             end
             hold on
