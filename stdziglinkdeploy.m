@@ -1,4 +1,4 @@
-function y = stdlinkdeploy(x)
+function y = stdziglinkdeploy(x)
 if x == 1
     y = [   1.0000         0    1.0000    1.0285    0.9975;
             2.0000         0    2.0000   19.9127    0.8004;

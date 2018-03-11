@@ -4,14 +4,14 @@ clc;
 
 %%
 packetsize = 6;
-sourcefile = gensourcefile(packetsize);
-% sourcefile = stdsourcefile(1);
+% sourcefile = gensourcefile(packetsize);
+sourcefile = stdsourcefile(1);
 
 %%
 nodenumber = 20;
 networkrange = 20;
-position = genposition(nodenumber,networkrange);
-% position = std20point(1);
+% position = genposition(nodenumber,networkrange);
+position = std20point(1);
 
 %% find the routing
 forzigbee = 1;
@@ -34,11 +34,13 @@ lqdeploy = callinkquality(position, routingtable, meanlq, stdlq);
 zigwake = 10;
 zigsleep = 100;
 wifiwake = 2;
-wifitraffic = 0.8;
+wifitraffic = 0.5;
 
 
 %% run pando
 [status, meandelay, maxdelay] = pando(lqdeploy, sourcefile, forzigbee, zigwake, zigsleep, wifiwake, wifitraffic);
+
+meandelay
 
 
 

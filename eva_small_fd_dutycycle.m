@@ -1,19 +1,20 @@
-function [eva, fig] = eva_small_fd_wifitraffic(sf, zq, wq, zw, zs, ww, wf)    
-
-    %wf = 0.2:0.05:0.9;
-    num  =  size(wf,2);
+function [eva, fig] = eva_small_fd_dutycycle(sf, zq, wq, zw, dc, ww, wf)
+    
+    %dc = 0.01:0.01:0.1;
+    zs = zw./dc;
+    num  =  size(zs,2);
     eva=zeros(num,3);
-    eva(:,1) = wf';
+    eva(:,1) = dc';
     
     for i = 1:1:num
         forzigbee = 1;
-        [status, meandelay, maxdelay] = pando(zq, sf, forzigbee, zw, zs, ww, wf(i));
+        [status, meandelay, maxdelay] = pando(zq, sf, forzigbee, zw, zs(i), ww, wf);
         eva(i,2) = meandelay;
     end
 
     for i = 1:1:num
         forzigbee = 0;
-        [status, meandelay, maxdelay] = pando(wq, sf, forzigbee, zw, zs, ww, wf(i));
+        [status, meandelay, maxdelay] = pando(wq, sf, forzigbee, zw, zs(i), ww, wf);
         eva(i,3) = meandelay;
     end
     
@@ -24,11 +25,11 @@ function [eva, fig] = eva_small_fd_wifitraffic(sf, zq, wq, zw, zs, ww, wf)
    hold off
    
    ylabel('Flooding Latency (s)');
-   xlabel('WiFi traffic');
-   xticks([0:0.1:1]);
-   xlim([0 1]);
-   yticks([0:100:500]);
-   ylim([0 600]);
+   xlabel('Duty-cycle');
+   xticks([0:0.01:0.1]);
+   xlim([0 0.1]);
+%    yticks([0:100:500]);
+%    ylim([0 600]);
 
 % dim = [.4 .6 .3 .3];
 % str = 'Fake figure';
@@ -36,6 +37,5 @@ function [eva, fig] = eva_small_fd_wifitraffic(sf, zq, wq, zw, zs, ww, wf)
 
     set(gca,'FontSize',24);
     grid on;
-    print -deps FDWiFiTraffic
-   
+    print -deps FDDutyCycle
 end
