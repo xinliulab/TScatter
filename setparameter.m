@@ -1,5 +1,6 @@
-function [sf, po, nr, zr, wr, zt, wt, zq, wq, zw, zs, ww, wf, mq, sq] = setparameter(x)
+function [sf, nsf, po, nr, zr, wr, zt, wt, zq, wq, zw, zs, ww, wf, mq, sq] = setparameter(x)
 % sf =  sourcefile;
+% nsf = sourcefile for ncrt;
 % po = position;
 % zr = zigbee communicatoin range;
 % nr = network range;
@@ -16,6 +17,7 @@ function [sf, po, nr, zr, wr, zt, wt, zq, wq, zw, zs, ww, wf, mq, sq] = setparam
 % sq = std of link quality;
 
     sf = stdsourcefile(x);
+    nsf = ncrtsourcefile(x);
     po = std20point(x);
     nr = 20;
     zr = 6;

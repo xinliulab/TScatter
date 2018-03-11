@@ -2,7 +2,8 @@ close all;
 clear;
 clc;
 
-% sf =  sourcefile;
+% sf = sourcefile;
+% sf = sourcefile for ncrt;
 % po = position;
 % zr = zigbee communicatoin range;
 % nr = network range;
@@ -18,7 +19,7 @@ clc;
 % mq = mean of link quality;
 % sq = std of link quality;
     
-[sf, po, nr, zr, wr, zt, wt, zq, wq, zw, zs, ww, wf, mq, sq] = setparameter(1);
+[sf, nsf, po, nr, zr, wr, zt, wt, zq, wq, zw, zs, ww, wf, mq, sq] = setparameter(1);
 
 enFdWiFiTraffic = 0;
 enFdWiFiDistance = 0;
@@ -27,8 +28,8 @@ enFdDutyCycle = 0;
 
 %% evaluation for small scale: fd vs wifi traffic
 if enFdWiFiTraffic == 1
-    wf1 = 0.2:0.05:0.9;
-    [eva1, fig1] = eva_small_fd_wifitraffic(sf, zq, wq, zw, zs, ww, wf1);
+    wf = 0.1:0.0625:0.6;
+    [eva1, fig1] = eva_small_fd_wifitraffic(sf, nsf, zq, wq, zw, zs, ww, wf);
 end
 
 %% evaluation for small scale: fd vs distance of wifi to wifi

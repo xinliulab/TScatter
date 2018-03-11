@@ -27,6 +27,10 @@ end
 while ~all(lqsdt(:,4)>0)
     time = time + 1;
     ws = worksequence(forzigbee, time, zigwake, zigsleep, wifiwake, wifitraffic);
+%% test point
+%     if ws ==1 
+%         [time, ws]
+%     end
     if ws == 1
         for i = 1:1:numr
             if lqsdt(i,4) == 1
