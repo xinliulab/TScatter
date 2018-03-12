@@ -14,39 +14,42 @@ function [eva, fig] = eva_small_fd_wifitraffic(sf, nsf, zq, wq, zw, zs, ww, wf)
     end
 
     for i = 1:1:num
+        forzigbee = 0;
+        [status, meandelay, maxdelay] = pando(wq, nsf, forzigbee, zw, zs, ww, wf(i));
+        eva(i,3) = meandelay;
+    end
+    
+    for i = 1:1:num
         forzigbee = 1;
         if i ==1 
             [status, meandelay, maxdelay] = pando(zq, sf, forzigbee, zw, zs, ww, wf(i));
-            eva(i,3) = meandelay;
+            eva(i,4) = meandelay;
         else
-            while eva(i,3) < 1.05*eva(i-1,3)
+            while eva(i,4) < 1.05*eva(i-1,4)
                 [status, meandelay, maxdelay] = pando(zq, sf, forzigbee, zw, zs, ww, wf(i));
-                eva(i,3) = meandelay;
+                eva(i,4) = meandelay;
                 i
             end
         end
     end
     
-    for i = 1:1:num
-        forzigbee = 0;
-        [status, meandelay, maxdelay] = pando(wq, nsf, forzigbee, zw, zs, ww, wf(i));
-        eva(i,4) = meandelay;
-    end
+
     
    fig = figure('Position',[0 250 800 350]); 
    plot(xrange',eva(:,2),'-', 'Color','r','LineWidth',4);
    hold on
-   plot(xrange',eva(:,3),':','Color','b','LineWidth',4);
+   plot(xrange',eva(:,3),'-.','Color','k','LineWidth',4);
    hold on
-   plot(xrange',eva(:,4),'-.','Color','k','LineWidth',4);
+   plot(xrange',eva(:,4),':','Color','b','LineWidth',4);
    hold off
+
    
    ylabel('Flooding Delay (s)');
    xlabel('Packets/s');
    xticks(xrange);
    xlim([10 50]);
 
-   legend('CRF','PANDO', 'NCRF', 'Location','northwest');
+   legend('CRF','NCRF', 'PANDO', 'Location','northwest');
 
 
     set(gca,'FontSize',24);
