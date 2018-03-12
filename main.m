@@ -26,7 +26,10 @@ enFdWiFiDistance = 0;
 enFdDutyCycle = 0;
 enReliabilityWiFiTraffic = 0;
 enReliabilityDutyCycle = 0;
-enReliabilityDisseTime = 1;
+enReliabilityDisseTime = 0;
+enThFloodFreq = 0;
+enTransmissionHop = 0;
+enRdTrHop = 0;
 
 %% evaluation for small scale: fd vs wifi traffic
 if enFdWiFiTraffic == 1
@@ -59,5 +62,27 @@ end
 
 %% evaluation for small scale: reliability vs dissemination time
 if enReliabilityDisseTime == 1
-    [eva6, fig6] = eva_small_reliability_disseminationtime(sf, nsf, zq, wq, zw, zs, ww, wf);
+    [eva6, fig6] = eva_wifi_th_floodfrq(sf, nsf, zq, wq, zw, dc6, ww, wf);
 end
+
+%% evaluation for wifi routing: throughput vs flooding frequency
+if enThFloodFreq == 1
+    dc7 = 0.01:0.01:0.1;
+    [eva7, fig7] = eva_wifi_th_floodfrq(sf, nsf, zq, wq, zw, dc7, ww, wf);
+end
+
+%% evaluation for wifi routing: transmission vs number of hops
+if enTransmissionHop == 1
+    numhop = 4;
+    [eva8, fig8] = eva_wifi_tr_hop(numhop, sf, nsf, wr, zw, zs, ww, wf, mq);
+end
+
+%% evaluation for wifi routing: redundant transmission vs number of hops
+if enRdTrHop == 1
+    hop1 = stdwifirouting(1, wr);
+    hop2 = stdwifirouting(2, wr);
+    hop3 = stdwifirouting(3, wr);
+    hop4 = stdwifirouting(4, wr);
+end
+
+

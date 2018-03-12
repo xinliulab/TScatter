@@ -21,7 +21,7 @@ if forzigbee == 1
 else
     comrange = networkrange;
 end
-% routingtable = findrouting(position, comrange);
+routingtable = findrouting(position, comrange);
 % fig = routingfigure(networkrange, position, routingtable);
 
 %% set link quality (lq)
@@ -48,7 +48,7 @@ lqdeploy = stdziglinkdeploy(1);
 %     meandelay
 % end
 
-[status, meandelay, maxdelay] = pando(lqdeploy, sourcefile, forzigbee, zigwake, zigsleep, wifiwake, wifitraffic);
+% [status, meandelay, maxdelay] = pando(lqdeploy, sourcefile, forzigbee, zigwake, zigsleep, wifiwake, wifitraffic);
 
 
 

@@ -3,6 +3,8 @@ function lq = genlinkquality(num, meanval, stdval)
     
     if meanval + stdval > 1 || meanval - stdval <0
         fprintf('Wrong imput for mean and std');
+    elseif num == 1
+        lq = [meanval];
     else
         while flag == 0 
             flag = 1;
