@@ -1,28 +1,22 @@
-   
-eva = importdata('eva_fig1_data.mat');
+clc;
+clear;
 
-xrange = 10:5:50;
+maxtime = 6;
+numnode = 4;
+timesort = zeros(maxtime,4);
+timesort(:,1) = round([1:1:maxtime]');
+time=[1,2,3;1,4,4;3,4,5;3,5,6];
 
-
-   fig = figure('Position',[0 250 800 350]); 
-   plot(xrange',eva(:,2),'-', 'Color','r','LineWidth',4);
-   hold on
-   plot(xrange',eva(:,3),'-.','Color','k','LineWidth',4);
-   hold on
-   plot(xrange',eva(:,4),':','Color','b','LineWidth',4);
-   hold off
-
-   
-   ylabel('Flooding Delay (s)');
-   xlabel('Packets/s');
-   xticks(xrange);
-   xlim([10 50]);
-
-   legend('CRF','NCRF', 'PANDO', 'Location','northwest');
-
-
-    set(gca,'FontSize',24);
-    grid on;
-%     print -deps FDWiFiTraffic.eps
-    saveas(gca, 'FDWiFiTraffic.eps','epsc');
- 
+for i = 1:1:size(time,2)
+    i
+       for j = 1:1:numnode
+           j
+           time
+           timesort
+           timesort(time(j,i), i+1) = timesort(time(j,i),i+1) + 1/4;
+           if time(j,i)+1<=maxtime
+                timesort(time(j,i)+1:end, i+1) = timesort(time(j,i), i+1);
+           end
+           timesort
+       end
+   end

@@ -25,12 +25,13 @@ enFdWiFiTraffic = 0;
 enFdWiFiDistance = 0;
 enFdDutyCycle = 0;
 enReliabilityWiFiTraffic = 0;
-
+enReliabilityDutyCycle = 0;
+enReliabilityDisseTime = 1;
 
 %% evaluation for small scale: fd vs wifi traffic
 if enFdWiFiTraffic == 1
-    wf = 0.1:0.0625:0.6;
-    [eva1, fig1] = eva_small_fd_wifitraffic(sf, nsf, zq, wq, zw, zs, ww, wf);
+    wf1 = 0.1:0.0625:0.6;
+    [eva1, fig1] = eva_small_fd_wifitraffic(sf, nsf, zq, wq, zw, zs, ww, wf1);
 end
 
 %% evaluation for small scale: fd vs distance of wifi to wifi
@@ -40,18 +41,23 @@ end
 
 %% evaluation for small scale: fd vs duty cycle of zigbee
 if enFdDutyCycle == 1
-    dc = 0.01:0.01:0.1;
-    [eva3, fig3] = eva_small_fd_dutycycle(sf, nsf, zq, wq, zw, dc, ww, wf);
+    dc3 = 0.01:0.01:0.1;
+    [eva3, fig3] = eva_small_fd_dutycycle(sf, nsf, zq, wq, zw, dc3, ww, wf);
 end
 
 %% evaluation for small scale: reliability vs wifi traffic
 if enReliabilityWiFiTraffic == 1
-    wf = 0.0375:0.0625:0.225;
-    [eva4, fig4] = eva_small_reliability_wifitraffic(sf, nsf, zq, wq, zw, zs, ww, wf);
+    wf4 = 0.0375:0.0625:0.225;
+    [eva4, fig4] = eva_small_reliability_wifitraffic(sf, nsf, zq, wq, zw, zs, ww, wf4);
 end
 
 %% evaluation for small scale: reliability vs duty cycle
-if enReliabilityWiFiTraffic == 1
-    wf = 0.0375:0.0625:0.225;
-    [eva4, fig4] = eva_small_reliability_dutycycle(sf, nsf, zq, wq, zw, dc, ww, wf);
+if enReliabilityDutyCycle == 1
+    dc5 = 0.01:0.01:0.1;
+    [eva5, fig5] = eva_small_reliability_dutycycle(sf, nsf, zq, wq, zw, dc5, ww, wf);
+end
+
+%% evaluation for small scale: reliability vs dissemination time
+if enReliabilityDisseTime == 1
+    [eva6, fig6] = eva_small_reliability_disseminationtime(sf, nsf, zq, wq, zw, zs, ww, wf);
 end
