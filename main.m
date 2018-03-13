@@ -30,6 +30,10 @@ enReliabilityDisseTime = 0;
 enThFloodFreq = 0;
 enTransmissionHop = 0;
 enRdTrHop = 0;
+enLargeMeshLQ = 0;
+enLargeMeshNm = 1;
+enLargeTreeLQ= 0;
+enLargeTreeNm = 0;
 
 %% evaluation for small scale: fd vs wifi traffic
 if enFdWiFiTraffic == 1
@@ -77,12 +81,14 @@ if enTransmissionHop == 1
     [eva8, fig8] = eva_wifi_tr_hop(numhop, sf, nsf, wr, zw, zs, ww, wf, mq);
 end
 
-%% evaluation for wifi routing: redundant transmission vs number of hops
-if enRdTrHop == 1
-    hop1 = stdwifirouting(1, wr);
-    hop2 = stdwifirouting(2, wr);
-    hop3 = stdwifirouting(3, wr);
-    hop4 = stdwifirouting(4, wr);
+%% evaluation for mesh network: delay vs link quality
+if enLargeMeshLQ == 1
+    lq =  [0.55:0.05:0.95];
+    [eva9, fig9] = eva_mesh_delay_lq(sf, nsf, lq, zw, zs, ww, wf);
 end
 
-
+%% evaluation for mesh network: delay vs node number
+if enLargeMeshNm == 1
+    Nm =  [10:10:50];
+    [eva10, fig10] = eva_mesh_delay_nm(sf, nsf, Nm, mq, zw, zs, ww, wf);
+end
