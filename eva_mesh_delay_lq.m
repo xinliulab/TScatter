@@ -17,7 +17,7 @@ for p = 1:1:iteration
     routingtable = findrouting(position, wr);
 %         routingfigure(networkrange, position, routingtable);
     for i = 1:1:num
-        if j = 1:1:iteration
+        for j = 1:1:iteration
             lqdeploy = callinkquality(position, routingtable, lq(i), stdlq);
             [status, meandelay, maxdelay] = pando(lqdeploy, sf, forzigbee, zw, zs, ww, wf);
             eva(i,2) = eva(i,2) + meandelay;
@@ -32,7 +32,7 @@ for p = 1:1:iteration
     routingtable = findrouting(position, zr);
 %         routingfigure(networkrange, position, routingtable);
     for i = 1:1:num
-        if j = 1:1:iteration
+        for j = 1:1:iteration
             lqdeploy = callinkquality(position, routingtable, lq(i), stdlq);
             [status, meandelay, maxdelay] = pando(lqdeploy, sf, forzigbee, zw, zs, ww, wf);
             eva(i,4) = eva(i,4) + meandelay;
