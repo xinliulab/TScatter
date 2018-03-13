@@ -31,11 +31,11 @@ enThFloodFreq = 0;
 enTransmissionHop = 0;
 enRdTrHop = 0;
 enLargeMeshLQ = 0;
-enLargeMeshNm = 0;
+enLargeMeshNm = 1;
 enLargeTreeLQ= 0;
 enLargeTreeNm = 0;
 enRePacketsDutyCycle = 0;
-enRePacketsWiFiTraffic = 1;
+enRePacketsWiFiTraffic = 0;
 
 %% evaluation for small scale: fd vs wifi traffic
 if enFdWiFiTraffic == 1
@@ -91,7 +91,7 @@ end
 
 %% evaluation for mesh network: delay vs node number
 if enLargeMeshNm == 1
-    Nm =  [10:10:50];
+    Nm =  [100:100:500];
     [eva10, fig10] = eva_mesh_delay_nm(sf, nsf, Nm, mq, zw, zs, ww, wf);
 end
 
