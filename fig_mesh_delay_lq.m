@@ -5,7 +5,7 @@ clear;
 clc;
 
 eva = cell2mat(struct2cell(load('eva_mesh_delay_lq_copy.mat')));
-eva(:,3) = eva(:,3) + 500
+eva(:,3) = eva(:,3) + 500;
 fig = figure('Position',[0 250 800 350]); 
 h = bar(eva(1:end-1,1)',eva(1:end-1,2:4));
 set(h(1),'FaceColor','red');

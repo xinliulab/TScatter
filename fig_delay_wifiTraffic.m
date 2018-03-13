@@ -21,7 +21,7 @@ xticks(xrange);
 xlim([10 50]);
 xticklabels({'10%','15%', '20%', '25%', '30%', '35%', '40%', '45%','50%'});
 
-legend('CRF','NCRF', 'PANDO', 'Location','north', 'Orientation','horizontal');
+legend('CRF','BCRF', 'PANDO', 'Location','north', 'Orientation','horizontal');
 
 
 set(gca,'FontSize',24);

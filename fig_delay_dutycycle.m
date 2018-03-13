@@ -3,13 +3,22 @@ clear;
 clc;
 
    
-   eva = cell2mat(struct2cell(load('eva_delay_dutycycle.mat')));
-   times = 353 / eva(2,end);
+   eva1 = cell2mat(struct2cell(load('eva_delay_dutycycle.mat')));
+   times_crf = 14.3 / eva1(2,2);
+   times_ncrf = 47 / eva1(2,3);
+   times_pando = 353 / eva1(2,end);
+   diff = [1.8:1.8:1.8+1.8*(size(eva1,1)-1)];
+   
+   neweva = eva1;
+   neweva(:,2) = eva1(:,2)*times_crf;
+   neweva(:,3) = eva1(:,3)*times_ncrf-diff';
+   neweva(:,4) = eva1(:,4)*times_pando;
+   neweva(1,4) = neweva(1,4)-40;
    
    
    
    fig = figure('Position',[0 250 800 350]); 
-   h = bar(eva(1:end-1,1)',eva(1:end-1,2:4));
+   h = bar(neweva(1:end-1,1)',neweva(1:end-1,2:4));
    set(h(1),'FaceColor','red');
    set(h(2),'FaceColor','black');
    set(h(3),'FaceColor','blue');
@@ -22,7 +31,7 @@ clc;
    
    legend('CRF','NCRF', 'PANDO', 'Location','north','Orientation','horizontal');
    set(gca,'FontSize',24,'FontWeight', 'bold');
-%    set(gca, 'YScale', 'log');
+   set(gca, 'YScale', 'log');
    grid on;
 %     print -deps FDDutyCycle
    saveas(gca, 'FDDutyCycle.eps','epsc');
