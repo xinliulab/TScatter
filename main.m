@@ -23,14 +23,14 @@ clc;
 
 enFdWiFiTraffic = 0;
 enFdWiFiDistance = 0;
-enFdDutyCycle = 0;
+enFdDutyCycle = 1;
 enReliabilityWiFiTraffic = 0;
 enReliabilityDutyCycle = 0;
 enReliabilityDisseTime = 0;
 enThFloodFreq = 0;
 enTransmissionHop = 0;
 enRdTrHop = 0;
-enLargeMeshLQ = 1;
+enLargeMeshLQ = 0;
 enLargeMeshNm = 0;
 enLargeTreeLQ= 0;
 enLargeTreeNm = 0;
@@ -50,7 +50,7 @@ end
 
 %% evaluation for small scale: fd vs duty cycle of zigbee
 if enFdDutyCycle == 1
-    dc3 = 0.01:0.01:0.1;
+    dc3 = [0.05:0.05:0.45];
     [eva3, fig3] = eva_small_fd_dutycycle(sf, nsf, zq, wq, zw, dc3, ww, wf);
 end
 
@@ -68,7 +68,7 @@ end
 
 %% evaluation for small scale: reliability vs dissemination time
 if enReliabilityDisseTime == 1
-    [eva6, fig6] = eva_wifi_th_floodfrq(sf, nsf, zq, wq, zw, dc6, ww, wf);
+    [eva6, fig6] = eva_small_reliability_disseminationtime(sf, nsf, zq, wq, zw, zs, ww, wf);
 end
 
 %% evaluation for wifi routing: throughput vs flooding frequency

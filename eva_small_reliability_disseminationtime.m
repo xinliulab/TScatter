@@ -1,7 +1,7 @@
 function [timesort, fig] = eva_small_reliability_disseminationtime(sf, nsf, zq, wq, zw, zs, ww, wf)    
 
     numnode = 20;
-    iteration = 20;
+    iteration = 50;
     time = zeros(numnode,3);
     
 
@@ -61,7 +61,7 @@ function [timesort, fig] = eva_small_reliability_disseminationtime(sf, nsf, zq, 
    yticks([0.25 0.5 0.75 1]);
    yticklabels({'25%','50%','75%','100%'});
    ylim([0,1]);
-   xlabel('Dessimination Time (s)');
+   xlabel('Dissemination Time (s)');
    xlim([0, maxtime]);
 %    xticks(xrange);
 %    xlim([10 50]);
