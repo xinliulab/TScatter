@@ -11,14 +11,14 @@ function [eva, fig] = eva_small_fd_dutycycle(sf, nsf, zq, wq, zw, dc, ww, wf)
     for i = 1:1:num
         forzigbee = 0;
         [status, meandelay, maxdelay] = pando(wq, sf, forzigbee, zw, zs(i), ww, wf);
-        eva(i,2) = eva(i,2) + meandelay;
+        eva(i,2) = eva(i,2) + maxdelay;
         
         [status, meandelay, maxdelay] = pando(wq, nsf, forzigbee, zw, zs(i), ww, wf);
-        eva(i,3) = eva(i,3) + meandelay;
+        eva(i,3) = eva(i,3) + maxdelay;
 
         forzigbee = 1;
         [status, meandelay, maxdelay] = pando(zq, sf, forzigbee, zw, zs(i), ww, wf);
-        eva(i,4) = eva(i,4) + meandelay;
+        eva(i,4) = eva(i,4) + maxdelay;
         
         [j,i]
     end

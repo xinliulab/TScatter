@@ -5,7 +5,7 @@ clc;
 
   timesort = cell2mat(struct2cell(load('eva_realiability_time.mat')));
 
-
+   fig = figure('Position',[0 250 800 350]); 
   
    plot(timesort(:,1),timesort(:,2),'-', 'Color','r','LineWidth',4);
    hold on
@@ -27,7 +27,7 @@ clc;
    legend('CRF','NCRF', 'PANDO', 'Location','southeast');
 
 
-    set(gca,'FontSize',24);
+    set(gca,'FontSize',24,'FontWeight', 'bold');
     grid on;
 %     print -deps FDWiFiTraffic.eps
     saveas(gca, 'ReDisseTime.eps','epsc');

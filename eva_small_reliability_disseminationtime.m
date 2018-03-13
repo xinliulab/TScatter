@@ -69,7 +69,7 @@ function [timesort, fig] = eva_small_reliability_disseminationtime(sf, nsf, zq, 
    legend('CRF','NCRF', 'PANDO', 'Location','southeast');
 
 
-    set(gca,'FontSize',24);
+    set(gca,'FontSize',24,'FontWeight', 'bold');
     grid on;
 %     print -deps FDWiFiTraffic.eps
     saveas(gca, 'ReDisseTime.eps','epsc');
