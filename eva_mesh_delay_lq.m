@@ -2,45 +2,49 @@ function [eva, fig] = eva_mesh_delay_lq(sf, nsf, lq, zw, zs, ww, wf)
 
 num = size(lq,2);
 nodenumber = 200;
-networkrange = 80;
-position = genposition(nodenumber,networkrange);
+iteration = 10;
+networkrange = 65;
+eva = zeros(num,4);
+eva(:,1) = lq';
 wr = networkrange;
 zr = 10;
 stdlq = 0;
 
-eva = zeros(num,4);
-eva(:,1) = lq';
-
+for p = 1:1:iteration
+    position = genposition(nodenumber,networkrange);
     
-        forzigbee = 0;
-        routingtable = findrouting(position, wr);
-        routingfigure(networkrange, position, routingtable);
+    forzigbee = 0;
+    routingtable = findrouting(position, wr);
+%         routingfigure(networkrange, position, routingtable);
     for i = 1:1:num
-        lqdeploy = callinkquality(position, routingtable, lq(i), stdlq);
-        [status, meandelay, maxdelay] = pando(lqdeploy, sf, forzigbee, zw, zs, ww, wf);
-        eva(i,2) = meandelay;
+        if j = 1:1:iteration
+            lqdeploy = callinkquality(position, routingtable, lq(i), stdlq);
+            [status, meandelay, maxdelay] = pando(lqdeploy, sf, forzigbee, zw, zs, ww, wf);
+            eva(i,2) = eva(i,2) + meandelay;
+            
+            [status, meandelay, maxdelay] = pando(lqdeploy, nsf, forzigbee, zw, zs, ww, wf);
+            eva(i,3) = eva(i,2) + meandelay;
+        end
     end
 
     
-        forzigbee = 0;
-        routingtable = findrouting(position, wr);
-        routingfigure(networkrange, position, routingtable);
+    forzigbee = 1;
+    routingtable = findrouting(position, zr);
+%         routingfigure(networkrange, position, routingtable);
     for i = 1:1:num
-        lqdeploy = callinkquality(position, routingtable, lq(i), stdlq);
-        [status, meandelay, maxdelay] = pando(lqdeploy, nsf, forzigbee, zw, zs, ww, wf);
-        eva(i,3) = meandelay;
+        if j = 1:1:iteration
+            lqdeploy = callinkquality(position, routingtable, lq(i), stdlq);
+            [status, meandelay, maxdelay] = pando(lqdeploy, sf, forzigbee, zw, zs, ww, wf);
+            eva(i,4) = eva(i,4) + meandelay;
+        end
     end
+end
 
+    eva(i,2) = eva(i,2) / iteration /iteration;
+    eva(i,3) = eva(i,3) / iteration /iteration; 
+    eva(i,4) = eva(i,4) / iteration /iteration; 
     
-        forzigbee = 1;
-        routingtable = findrouting(position, zr);
-        routingfigure(networkrange, position, routingtable);
-    for i = 1:1:num
-        lqdeploy = callinkquality(position, routingtable, lq(i), stdlq);
-        [status, meandelay, maxdelay] = pando(lqdeploy, sf, forzigbee, zw, zs, ww, wf);
-        eva(i,4) = meandelay;
-    end
-
+    
    fig = figure('Position',[0 250 800 350]); 
    h = bar(eva(:,1)',eva(:,2:4));
    set(h(1),'FaceColor','red');
