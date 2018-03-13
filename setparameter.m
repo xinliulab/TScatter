@@ -31,7 +31,7 @@ function [sf, nsf, po, nr, zr, wr, zt, wt, zq, wq, zw, zs, ww, wf, mq, sq] = set
     zw = 10;
     zs = 100;
     ww = 2;
-    wf = 0.8;
+    wf = 0.5;
     mq = 0.8;
     sq = 0.15;
     

@@ -6,7 +6,7 @@ function [eva, fig] = eva_wifi_th_floodfrq(sf, nsf, zq, wq, zw, dc, ww, wf)
     eva(:,1) = dc';
     
     for i = 1:1:num
-        eva(i,2) = 10*dc(i)+30; % Throughput of CRF
+        eva(i,2) = -26/28*10*dc(i)+30; % Throughput of CRF
         eva(i,3)= 10*dc(i)*size(sf,2)/size(nsf,2)+30; % Throughput of NCRF
         eva(i,4) = 30 - 10*dc(i); % Throughput of XPRESS
     end

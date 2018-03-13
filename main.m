@@ -31,9 +31,11 @@ enThFloodFreq = 0;
 enTransmissionHop = 0;
 enRdTrHop = 0;
 enLargeMeshLQ = 0;
-enLargeMeshNm = 1;
+enLargeMeshNm = 0;
 enLargeTreeLQ= 0;
 enLargeTreeNm = 0;
+enRePacketsDutyCycle = 0;
+enRePacketsWiFiTraffic = 1;
 
 %% evaluation for small scale: fd vs wifi traffic
 if enFdWiFiTraffic == 1
@@ -91,4 +93,16 @@ end
 if enLargeMeshNm == 1
     Nm =  [10:10:50];
     [eva10, fig10] = eva_mesh_delay_nm(sf, nsf, Nm, mq, zw, zs, ww, wf);
+end
+
+%% evaluation for small scale: number of received packets vs duty cycle of zigbee
+if enRePacketsDutyCycle == 1
+    dc11 = 0.01:0.01:0.1;
+    [eva11, fig11] = eva_small_repackets_dutycycle(sf, nsf, zq, wq, zw, dc11, ww, wf);
+end
+
+%% evaluation for small scale: fd vs wifi traffic
+if enRePacketsWiFiTraffic == 1
+    wf12 = 0.1:0.0625:0.6;
+    [eva12, fig12] = eva_small_repackets_wifitraffic(sf, nsf, zq, wq, zw, zs, ww, wf12);
 end
