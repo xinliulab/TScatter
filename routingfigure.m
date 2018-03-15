@@ -29,7 +29,7 @@ function fig = routingfigure(range, position, routetable)
     axis([-range/2-1,range/2+1,-range/2-1,range/2+1]);
     hold on
 
-    c=['r','b','g','c','m','k'];
+    c=['r','b','g','c','m','k','r','b','g','c','m','k','r','b','g','c','m','k','r','b','g','c','m','k'];
     for i = 2:1:size(routetable,2)
         figtemp = unique(routetable(:,i-1:i),'rows');
         for j = 1:1:size(figtemp,1)
