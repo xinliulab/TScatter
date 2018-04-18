@@ -24,7 +24,7 @@ clc;
 %    xticks(xrange);
 %    xlim([10 50]);
 
-   legend('CRF','NCRF', 'PANDO', 'Location','southeast');
+   legend('CRF','BCRF', 'PANDO', 'Location','southeast');
 
 
     set(gca,'FontSize',24,'FontWeight', 'bold');

@@ -54,7 +54,7 @@ end
    xticklabels({'3','6','9','12','15','18','21'});
 
 
-   legend('CRF','NCRF','XRPESS','location','South','Orientation','horizontal');
+   legend('CRF','BCRF','XRPESS','location','South','Orientation','horizontal');
    set(gca,'FontSize',24,'FontWeight', 'bold');
     
     grid on;

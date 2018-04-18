@@ -29,7 +29,7 @@ clc;
    xticks([0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45]);
    xticklabels({'5%','10%','15%','20%','25%','30%','35%','40%', '45%'});
    
-   legend('CRF','NCRF', 'PANDO', 'Location','north','Orientation','horizontal');
+   legend('CRF','BCRF', 'PANDO', 'Location','north','Orientation','horizontal');
    set(gca,'FontSize',24,'FontWeight', 'bold');
    set(gca, 'YScale', 'log');
    grid on;

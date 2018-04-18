@@ -24,7 +24,7 @@ xticklabels({'10%','15%', '20%', '25%', '30%', '35%', '40%', '45%','50%'});
 legend('CRF','BCRF', 'PANDO', 'Location','north', 'Orientation','horizontal');
 
 
-set(gca,'FontSize',24);
+set(gca,'FontSize',24,'FontWeight', 'bold');
 grid on;
 %     print -deps FDWiFiTraffic.eps
 saveas(gca, 'FDWiFiTraffic.eps','epsc');
